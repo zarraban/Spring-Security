@@ -13,9 +13,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
     public UserServiceImpl(
     @Qualifier("userRepository") UserRepository userRepository,
     @Qualifier("roleRepository") RoleRepository roleRepository,
