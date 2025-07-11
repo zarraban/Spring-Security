@@ -37,7 +37,6 @@ public class User {
     private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @ElementCollection(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
