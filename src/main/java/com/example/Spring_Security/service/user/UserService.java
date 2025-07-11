@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service("userService")
+@Service
 public interface UserService {
     void save(UserDto userDto);
-    User findById(Long id);
+    User findByEmail(String email);
     List<UserDto> findAll();
 }

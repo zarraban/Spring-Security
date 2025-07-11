@@ -7,11 +7,14 @@ import com.example.Spring_Security.repository.role.RoleRepository;
 import com.example.Spring_Security.repository.user.UserRepository;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service("userService")
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
@@ -27,6 +30,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    @Transactional
     public void save(UserDto userDto) {
         User newUser = new User();
         newUser.setFirstName(userDto.getName());
@@ -43,11 +47,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+    @Transactional(readOnly = true)
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<UserDto> findAll() {
         List<User> users = userRepository.findAll();
 
