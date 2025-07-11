@@ -76,11 +76,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public boolean deleteByEmail(String email){
+    public void deleteByEmail(String email){
         Objects.requireNonNull(email, "Email should not be null!");
         userRepository.deleteByEmail(email);
-
-        return userRepository.findByEmail(email) == null;
 
     }
     private UserDto entityToDto(User user){
