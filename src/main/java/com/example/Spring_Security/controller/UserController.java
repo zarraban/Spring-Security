@@ -36,17 +36,15 @@ public class UserController {
     public String usersForm(Model model){
         List<UserDto> users = userService.findAll();
         model.addAttribute("title", "Users Page");
-        model.addAttribute("fragmentName", "users");
         model.addAttribute("users", users);
-        return "layout";
+        return "fragments/users";
     }
 
     @GetMapping("/index")
     public String homePage(Model model){
         model.addAttribute("title", "Home page");
-        model.addAttribute("fragmentName", "index");
         model.addAttribute("number", formatNumberOfUsers(userService.countAll()));
-        return "layout";
+        return "fragments/index";
     }
 
 
@@ -54,7 +52,7 @@ public class UserController {
     public String loginPage(Model model){
         model.addAttribute("title", "Login page");
         model.addAttribute("fragmentName", "login");
-        return "layout";
+        return "fragments/login";
 
     }
 
@@ -80,7 +78,7 @@ public class UserController {
         if (result.hasErrors()) {
             model.addAttribute("title", "Register");
             model.addAttribute("user", user);
-            return "register";
+            return "fragments/register";
         }
         userService.save(user);
         return "redirect:/register?success";
