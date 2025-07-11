@@ -40,7 +40,10 @@ public class AppSecurity {
                                 "login",
                                 "/register"
                                         ).permitAll()
-                                .requestMatchers("/users").hasRole("ADMIN")
+                                .requestMatchers(
+                                        "/users",
+                                        "/users/delete/**"
+                                ).hasRole("ADMIN")
                                 .anyRequest().authenticated())
 
                 .formLogin(form->
