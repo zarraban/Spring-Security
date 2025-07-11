@@ -11,4 +11,6 @@ public interface UserService {
     void save(UserDto userDto);
     User findByEmail(String email);
     List<UserDto> findAll();
+    int countAll();
+    boolean deleteByEmail(String email);
 }

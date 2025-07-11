@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -63,7 +64,27 @@ public class UserServiceImpl implements UserService {
             return users.stream().map(this::entityToDto).collect(Collectors.toList());
         }
     }
+
+    @Transactional(readOnly = true)
+    public int countAll(){
+       List<User> users = userRepository.findAll();
+       if(users.isEmpty()){
+           return 0;
+       }else {
+           return users.size();
+       }
+    }
+
+    @Transactional
+    public boolean deleteByEmail(String email){
+        Objects.requireNonNull(email, "Email should not be null!");
+        userRepository.deleteByEmail(email);
+
+        return userRepository.findByEmail(email) == null;
+
+    }
     private UserDto entityToDto(User user){
+        Objects.requireNonNull(user, "User should not be null!");
         UserDto userDto = new UserDto();
         userDto.setEmail(user.getEmail());
         userDto.setName(user.getFirstName());
