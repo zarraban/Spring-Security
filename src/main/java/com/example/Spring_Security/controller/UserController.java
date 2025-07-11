@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -39,10 +40,12 @@ public class UserController {
         model.addAttribute("users", users);
         return "layout";
     }
+
     @GetMapping("/index")
     public String homePage(Model model){
         model.addAttribute("title", "Home page");
         model.addAttribute("fragmentName", "index");
+        model.addAttribute("number", formatNumberOfUsers(userService.countAll()));
         return "layout";
     }
 
@@ -82,6 +85,22 @@ public class UserController {
         userService.save(user);
         return "redirect:/register?success";
 
+    }
+
+
+    @PostMapping("/users/delete/{email}")
+    public String deleteUser(@PathVariable("email") String email){
+        userService.deleteByEmail(email);
+        return "redirect:/users";
+
+    }
+
+    private String formatNumberOfUsers(int number){
+        if(number == 1){
+            return "is "+number + " user";
+        }else {
+            return "are " + number + " users";
+        }
     }
 
 
