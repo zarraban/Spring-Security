@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
         newUser.setLastName(userDto.getSurname());
         newUser.setPassword(passwordEncoder.encode(userDto.getPassword()));
         newUser.setEmail(userDto.getEmail());
+        newUser.setPhone(userDto.getPhone());
 
         Role roles = roleRepository.findByName("ADMIN");
         if(roles==null){
@@ -87,6 +88,7 @@ public class UserServiceImpl implements UserService {
         userDto.setEmail(user.getEmail());
         userDto.setName(user.getFirstName());
         userDto.setSurname(user.getLastName());
+        userDto.setPhone(user.getPhone());
         return userDto;
     }
     private Role createNewRole(){

@@ -38,6 +38,7 @@
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
+                                <th>Phone</th>
                                 <th>Option</th>
                             </tr>
                         </thead>
@@ -46,6 +47,7 @@
                                 <td th:text="${user.name}"></td>
                                 <td th:text="${user.surname}"></td>
                                 <td th:text="${user.email}"></td>
+                                <td th:text="${user.phone}"></td>
                                 <td class="text-center">
                                     <form th:action="@{/users/delete/{email}(email=${user.email})}" method="POST">
                                         <button type="submit" class="btn btn-danger">Delete</button>

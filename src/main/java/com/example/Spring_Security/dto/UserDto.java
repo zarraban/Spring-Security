@@ -28,4 +28,7 @@ public class UserDto {
     @NotEmpty(message = "Password should not be empty!")
     private String password;
 
+    @NotEmpty(message = "Phone should not be empty!")
+    private String phone;
+
 }

@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS users(
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     first_name TEXT,
     last_name TEXT,
+    phone TEXT,
     email TEXT NOT NULL UNIQUE,
     password TEXT
 );
